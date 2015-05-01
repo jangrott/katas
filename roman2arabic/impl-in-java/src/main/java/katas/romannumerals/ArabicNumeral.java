@@ -1,15 +1,15 @@
 package katas.romannumerals;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+public final class ArabicNumeral {
 
-public class ArabicNumeral {
+    private final int value;
 
-    private final Integer value;
-
-    public ArabicNumeral(Integer value) {
-        checkNotNull(value, "Value can not be null");
-
+    private ArabicNumeral(int value) {
         this.value = value;
+    }
+
+    public static ArabicNumeral arabicNumeralOf(int value) {
+        return new ArabicNumeral(value);
     }
 
     @Override
@@ -19,18 +19,13 @@ public class ArabicNumeral {
 
         ArabicNumeral that = (ArabicNumeral) o;
 
-        if (value != null ? !value.equals(that.value) : that.value != null) return false;
+        if (value != that.value) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return value != null ? value.hashCode() : 0;
-    }
-
-    @Override
-    public String toString() {
-        return value.toString();
+        return value;
     }
 }

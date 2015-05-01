@@ -10,6 +10,8 @@ import org.junit.runners.Parameterized;
 import java.util.Arrays;
 import java.util.Collection;
 
+import static katas.romannumerals.ArabicNumeral.arabicNumeralOf;
+import static katas.romannumerals.RomanNumeral.romanNumeralOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(Parameterized.class)
@@ -22,28 +24,29 @@ public class RomanToArabicTest {
     @Parameterized.Parameters
     public static Collection params() {
         return Arrays.asList(new Object[][]{
-                {new RomanNumeral("I"), new ArabicNumeral(1)},
-                {new RomanNumeral("V"), new ArabicNumeral(5)},
-                {new RomanNumeral("X"), new ArabicNumeral(10)},
-                {new RomanNumeral("L"), new ArabicNumeral(50)},
-                {new RomanNumeral("C"), new ArabicNumeral(100)},
-                {new RomanNumeral("D"), new ArabicNumeral(500)},
-                {new RomanNumeral("M"), new ArabicNumeral(1000)},
-                {new RomanNumeral("IV"), new ArabicNumeral(4)},
-                {new RomanNumeral("VI"), new ArabicNumeral(6)},
-                {new RomanNumeral("VII"), new ArabicNumeral(7)},
-                {new RomanNumeral("VIII"), new ArabicNumeral(8)},
-                {new RomanNumeral("IX"), new ArabicNumeral(9)},
-                {new RomanNumeral("XXVII"), new ArabicNumeral(27)},
-                {new RomanNumeral("CCCXXV"), new ArabicNumeral(325)},
-                {new RomanNumeral("CDXXXII"), new ArabicNumeral(432)},
-                {new RomanNumeral("DCCCXLV"), new ArabicNumeral(845)},
-                {new RomanNumeral("MCMXLIV"), new ArabicNumeral(1944)},
-                {new RomanNumeral("MCMXLVII"), new ArabicNumeral(1947)},
-                {new RomanNumeral("MCMXLVIII"), new ArabicNumeral(1948)},
-                {new RomanNumeral("MMDCCCXIX"), new ArabicNumeral(2819)},
-                {new RomanNumeral("MMDCCCXVIII"), new ArabicNumeral(2818)},
-                {new RomanNumeral("MMMDXLIX"), new ArabicNumeral(3549)}
+                {romanNumeralOf("I"), arabicNumeralOf(1)},
+                {romanNumeralOf("V"), arabicNumeralOf(5)},
+                {romanNumeralOf("X"), arabicNumeralOf(10)},
+                {romanNumeralOf("L"), arabicNumeralOf(50)},
+                {romanNumeralOf("C"), arabicNumeralOf(100)},
+                {romanNumeralOf("D"), arabicNumeralOf(500)},
+                {romanNumeralOf("M"), arabicNumeralOf(1000)},
+                {romanNumeralOf("IV"), arabicNumeralOf(4)},
+                {romanNumeralOf("VI"), arabicNumeralOf(6)},
+                {romanNumeralOf("VII"), arabicNumeralOf(7)},
+                {romanNumeralOf("VIII"), arabicNumeralOf(8)},
+                {romanNumeralOf("IX"), arabicNumeralOf(9)},
+                {romanNumeralOf("XXVII"), arabicNumeralOf(27)},
+                {romanNumeralOf("CCCXXV"), arabicNumeralOf(325)},
+                {romanNumeralOf("CDXXXII"), arabicNumeralOf(432)},
+                {romanNumeralOf("DCCCXLV"), arabicNumeralOf(845)},
+                {romanNumeralOf("MCMXLIV"), arabicNumeralOf(1944)},
+                {romanNumeralOf("MCMXLVII"), arabicNumeralOf(1947)},
+                {romanNumeralOf("MCMXLVIII"), arabicNumeralOf(1948)},
+                {romanNumeralOf("MM"), arabicNumeralOf(2000)},
+                {romanNumeralOf("MMDCCCXIX"), arabicNumeralOf(2819)},
+                {romanNumeralOf("MMDCCCXVIII"), arabicNumeralOf(2818)},
+                {romanNumeralOf("MMMDXLIX"), arabicNumeralOf(3549)}
         });
     }
 

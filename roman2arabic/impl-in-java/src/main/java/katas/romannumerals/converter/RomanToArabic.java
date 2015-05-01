@@ -10,9 +10,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static katas.romannumerals.ArabicNumeral.arabicNumeralOf;
+
 public class RomanToArabic extends Converter<RomanNumeral, ArabicNumeral> {
 
-    public static final String REGEX = "(?<=(.))(?!\\1)";
+    public static final String PATTERN = "(?<=(.))(?!\\1)";
 
     private List<Integer> weightsOfSplittedParts;
 
@@ -29,25 +31,11 @@ public class RomanToArabic extends Converter<RomanNumeral, ArabicNumeral> {
 
         Integer arabicValue = weightsOfSplittedParts.get(0);
 
-        return new ArabicNumeral(arabicValue);
-    }
-
-    private void mergeWeightsWithSubtractionIfFirstIsGreaterThanSecond() {
-        if (firstWeightIsGreaterThanSecond()) {
-            mergeFirstAndSecondWeightWithSubtraction();
-        }
-    }
-
-    private void mergeWeightsWithAdditionIfFirstIsLessThanOrEqualToSecond() {
-        if (firstWeightIsLessThanOrEqualToSecond()) {
-            mergeFirstAndSecondWeightWithAddition();
-        }
+        return arabicNumeralOf(arabicValue);
     }
 
     private String[] splitIntoRepeatedChars(RomanNumeral roman) {
-        String valueToSplit = roman.value();
-
-        return valueToSplit.split(REGEX);
+        return roman.split(PATTERN);
     }
 
     private void createWeightOfSplittedPartsAndReverseOrder(String[] splittedRoman) {
@@ -73,6 +61,18 @@ public class RomanToArabic extends Converter<RomanNumeral, ArabicNumeral> {
 
     private Integer getWeightForSingle(Character roman) {
         return BasicMapping.weightOf(roman);
+    }
+
+    private void mergeWeightsWithAdditionIfFirstIsLessThanOrEqualToSecond() {
+        if (firstWeightIsLessThanOrEqualToSecond()) {
+            mergeFirstAndSecondWeightWithAddition();
+        }
+    }
+
+    private void mergeWeightsWithSubtractionIfFirstIsGreaterThanSecond() {
+        if (firstWeightIsGreaterThanSecond()) {
+            mergeFirstAndSecondWeightWithSubtraction();
+        }
     }
 
     private boolean firstWeightIsLessThanOrEqualToSecond() {
