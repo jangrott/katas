@@ -9,7 +9,7 @@ import static katas.romannumerals.ArabicNumeral.arabicNumeralOf
 import static katas.romannumerals.RomanNumeral.romanNumeralOf
 
 @Unroll
-class RomanToArabicSpecification extends Specification {
+class RomanToArabicSpec extends Specification {
 
     def "The arabic conversion of #romanValue is #arabicValue"() {
         expect:

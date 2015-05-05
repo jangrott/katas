@@ -5,7 +5,10 @@ import com.google.common.collect.Lists;
 import katas.romannumerals.ArabicNumeral;
 import katas.romannumerals.RomanNumeral;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static katas.romannumerals.ArabicNumeral.arabicNumeralOf;
 
@@ -15,7 +18,8 @@ public class RomanToArabic extends Converter<RomanNumeral, ArabicNumeral> {
 
     @Override
     protected ArabicNumeral doForward(RomanNumeral roman) {
-        int arabicValue = Lists.reverse(splitGroupsOfSameChars(roman))
+        int arabicValue = Lists
+                .reverse(splitGroupsOfSameChars(roman))
                 .stream()
                 .map((s) -> BasicMapping.weightOf(s.charAt(0)) * s.length())
                 .reduce(
