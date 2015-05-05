@@ -1,3 +1,6 @@
+import com.google.common.base.Converter
+import katas.romannumerals.ArabicNumeral
+import katas.romannumerals.RomanNumeral
 import katas.romannumerals.converter.RomanToArabic
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -10,7 +13,7 @@ class RomanToArabicSpecification extends Specification {
 
     def "The arabic conversion of #romanValue is #arabicValue"() {
         expect:
-            romanNumeralOf(romanValue).to(new RomanToArabic()) == arabicNumeralOf(arabicValue)
+            romanNumeralOf(romanValue).to(arabic()) == arabicNumeralOf(arabicValue)
         where:
             romanValue      ||  arabicValue
             "I"             ||  1
@@ -36,5 +39,9 @@ class RomanToArabicSpecification extends Specification {
             "MMDCCCXIX"     ||  2819
             "MMDCCCXVIII"   ||  2818
             "MMMDXLIX"      ||  3549
+    }
+
+    static Converter<RomanNumeral, ArabicNumeral> arabic() {
+        return new RomanToArabic();
     }
 }
