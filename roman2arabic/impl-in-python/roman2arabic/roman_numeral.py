@@ -4,7 +4,7 @@ from roman2arabic.arabic_numeral import ArabicNumeral
 
 class RomanNumeral:
 
-    VALIDATION = '^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$'
+    VALID_PATTERN = '^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$'
 
     def __init__(self, value):
         self.checkValue(value)
@@ -12,7 +12,7 @@ class RomanNumeral:
         self.value = value
 
     def checkValue(self, value):
-        if not value or not re.search(self.VALIDATION, value):
+        if not value or not re.search(self.VALID_PATTERN, value):
             raise ValueError("Wrong value!")
 
     def to_arabic(self):
