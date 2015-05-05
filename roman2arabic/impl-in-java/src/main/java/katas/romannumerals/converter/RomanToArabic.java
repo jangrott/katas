@@ -21,10 +21,8 @@ public class RomanToArabic extends Converter<RomanNumeral, ArabicNumeral> {
         int arabicValue = Lists
                 .reverse(splitGroupsOfSameChars(roman))
                 .stream()
-                .map((s) -> BasicMapping.weightOf(s.charAt(0)) * s.length())
-                .reduce(
-                        0, (first, second) -> first <= second ? first + second : first - second
-                );
+                .map(groupOfSameChars -> BasicMapping.weightOf(groupOfSameChars.charAt(0)) * groupOfSameChars.length())
+                .reduce(0, (first, second) -> first <= second ? first + second : first - second);
 
         return arabicNumeralOf(arabicValue);
     }
