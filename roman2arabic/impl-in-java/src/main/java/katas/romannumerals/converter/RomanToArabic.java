@@ -1,6 +1,5 @@
 package katas.romannumerals.converter;
 
-import com.google.common.base.Converter;
 import com.google.common.collect.Lists;
 import katas.romannumerals.ArabicNumeral;
 import katas.romannumerals.RomanNumeral;
@@ -9,32 +8,37 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
 
 import static katas.romannumerals.ArabicNumeral.arabicNumeralOf;
 
-public class RomanToArabic extends Converter<RomanNumeral, ArabicNumeral> {
+public class RomanToArabic implements Converter<RomanNumeral, ArabicNumeral> {
 
-    public static final String PATTERN = "(?<=(.))(?!\\1)";
+    public static final String PATTERN_FOR_GROUPING_REPEATED_CHARS = "(?<=(.))(?!\\1)";
 
     @Override
-    protected ArabicNumeral doForward(RomanNumeral roman) {
+    public ArabicNumeral convert(RomanNumeral roman) {
         int arabicValue = Lists
                 .reverse(splitGroupsOfSameChars(roman))
                 .stream()
-                .map(groupOfSameChars -> BasicMapping.weightOf(groupOfSameChars.charAt(0)) * groupOfSameChars.length())
-                .reduce(0, (first, second) -> first <= second ? first + second : first - second);
+                .map(valueOfGroup)
+                .reduce(0, accumulate);
 
         return arabicNumeralOf(arabicValue);
     }
 
     private List<String> splitGroupsOfSameChars(RomanNumeral roman) {
-        return Arrays.asList(roman.split(PATTERN));
+        return Arrays.asList(roman.split(PATTERN_FOR_GROUPING_REPEATED_CHARS));
     }
 
-    @Override
-    protected RomanNumeral doBackward(ArabicNumeral arabicNumeral) {
-        throw new UnsupportedOperationException("Not supported yet!");
+    private Function<String, Integer> valueOfGroup = group -> BasicMapping.valueOf(singleCharOf(group)) * group.length();
+
+    private char singleCharOf(String s) {
+        return s.charAt(0);
     }
+
+    private BinaryOperator<Integer> accumulate = (acc, cur) -> acc <= cur ? acc + cur : acc - cur;
 
     static class BasicMapping {
         private static final Map<Character, Integer> numerals = new HashMap<>();
@@ -49,7 +53,7 @@ public class RomanToArabic extends Converter<RomanNumeral, ArabicNumeral> {
             numerals.put('M', 1000);
         }
 
-        public static Integer weightOf(char numeral) {
+        public static int valueOf(char numeral) {
             return numerals.get(numeral);
         }
     }
