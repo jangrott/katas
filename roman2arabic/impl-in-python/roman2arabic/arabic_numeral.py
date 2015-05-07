@@ -1,10 +1,13 @@
 class ArabicNumeral:
 
     def __init__(self, value):
-        if value is None:
-            raise ValueError("Value can not be none!")
+        self.check_value(value)
 
         self.value = value
+
+    def check_value(self, value):
+        if value is None or not isinstance(value, int):
+            raise ValueError("Wrong value")
 
     def __eq__(self, other):
         return (isinstance(other, self.__class__)

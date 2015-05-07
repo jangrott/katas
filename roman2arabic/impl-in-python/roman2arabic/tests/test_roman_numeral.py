@@ -26,6 +26,11 @@ class TestRomanNumeral(unittest.TestCase):
         ('C', 100),
         ('D', 500),
         ('M', 1000),
+    ])
+    def test_basic_can_be_converted_to_arabic(self, a, b):
+        assert_equal(RomanNumeral(a).to_arabic(), ArabicNumeral(b))
+
+    @parameterized.expand([
         ('IV', 4),
         ('VI', 6),
         ('VII', 7),
@@ -42,5 +47,5 @@ class TestRomanNumeral(unittest.TestCase):
         ('MMDCCCXVIII', 2818),
         ('MMMDXLIX', 3549),
     ])
-    def test_can_convert_to_arabic(self, a, b):
+    def test_complex_can_be_converted_to_arabic(self, a, b):
         assert_equal(RomanNumeral(a).to_arabic(), ArabicNumeral(b))
