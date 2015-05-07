@@ -19,7 +19,7 @@ public class RomanToArabic implements Converter<RomanNumeral, ArabicNumeral> {
         Optional<Integer> arabicValue = Lists
                 .reverse(splitGroupsOfSameChars(roman))
                 .stream()
-                .map(toArabicValueOfGroup)
+                .map(groupToArabicValue)
                 .reduce(toArabicValue);
 
         return arabicNumeralOf(arabicValue.get());
@@ -29,7 +29,7 @@ public class RomanToArabic implements Converter<RomanNumeral, ArabicNumeral> {
         return Arrays.asList(roman.split(PATTERN_FOR_GROUPING_REPEATED_CHARS));
     }
 
-    private Function<String, Integer> toArabicValueOfGroup =
+    private Function<String, Integer> groupToArabicValue =
             group -> BasicMapping.valueOf(singleCharOf(group)) * group.length();
 
     private char singleCharOf(String s) {
