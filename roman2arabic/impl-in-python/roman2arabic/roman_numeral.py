@@ -2,10 +2,10 @@ import re
 
 from roman2arabic.arabic_numeral import ArabicNumeral
 
-class RomanNumeral:
 
+class RomanNumeral:
     ROMAN_NUMERAL_VALIDATION_PATTERN = \
-            '^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$'
+        '^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$'
 
     PATTERN_FOR_GROUPING_REPEATED_CHARS = r'(\w)\1*'
 
@@ -31,16 +31,19 @@ class RomanNumeral:
     def split_value_into_groups_of_same_chars(self):
         return [m.group(0) for m in re.finditer(self.PATTERN_FOR_GROUPING_REPEATED_CHARS, self.value)]
 
-    def to_arabic_value(self, acc, cur):
+    @staticmethod
+    def to_arabic_value(acc, cur):
         return acc + cur if acc <= cur else acc - cur
 
     def of_arabic_values_for_groups(self, group):
-        return self.basic_roman_value()[self.single_char_of(group)] * len(group)
+        return self.basic_roman_values()[self.char_of(group)] * len(group)
 
-    def single_char_of(self, s):
+    @staticmethod
+    def char_of(s):
         return s[0]
 
-    def basic_roman_value(self):
+    @staticmethod
+    def basic_roman_values():
         numerals = {
             'I': 1,
             'V': 5,

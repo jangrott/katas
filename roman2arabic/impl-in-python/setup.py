@@ -6,5 +6,5 @@ setup(name='Roman2Arabic',
       author='Tomasz Jangrot',
       author_email='tomek.jangrot@gmail.com',
       url='https://github.com/jangrott/katas/tree/master/roman2arabic/impl-in-python',
-      packages=['roman2arabic'],
-     )
+      packages=['roman2arabic'], requires=['nose']
+)

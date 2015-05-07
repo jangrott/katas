@@ -2,10 +2,11 @@ import unittest
 
 from nose.tools import assert_equal, assert_not_equal
 from nose_parameterized import parameterized
+
 from roman2arabic.arabic_numeral import ArabicNumeral
 
-class TestArabicNumeral(unittest.TestCase):
 
+class TestArabicNumeral(unittest.TestCase):
     def test_exception_should_be_raised_when_none_passed(self):
         with self.assertRaises(ValueError):
             ArabicNumeral(None)

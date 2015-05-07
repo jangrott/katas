@@ -5,8 +5,8 @@ from nose_parameterized import parameterized
 from roman2arabic.roman_numeral import RomanNumeral
 from roman2arabic.arabic_numeral import ArabicNumeral
 
-class TestRomanNumeral(unittest.TestCase):
 
+class TestRomanNumeral(unittest.TestCase):
     def test_exception_should_be_raised_when_none_passed(self):
         with self.assertRaises(ValueError):
             RomanNumeral(None)

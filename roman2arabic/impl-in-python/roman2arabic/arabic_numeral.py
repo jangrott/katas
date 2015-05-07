@@ -5,7 +5,8 @@ class ArabicNumeral:
 
         self.value = value
 
-    def check_value(self, value):
+    @staticmethod
+    def check_value(value):
         if value is None or not isinstance(value, int):
             raise ValueError("Wrong value")
 
