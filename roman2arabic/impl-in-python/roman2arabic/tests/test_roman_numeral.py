@@ -2,6 +2,7 @@ import unittest
 
 from nose.tools import assert_equal
 from nose_parameterized import parameterized
+
 from roman2arabic.roman_numeral import RomanNumeral
 from roman2arabic.arabic_numeral import ArabicNumeral
 
