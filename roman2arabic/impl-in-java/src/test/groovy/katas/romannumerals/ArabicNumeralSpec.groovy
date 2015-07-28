@@ -13,8 +13,8 @@ class ArabicNumeralSpec extends Specification {
         arabicNumeralOf(1) == arabicNumeralOf(1)
     }
 
-    def "The two arabic numerals with different value should be equal"() {
+    def "The two arabic numerals with different value should not be equal"() {
         expect:
-        arabicNumeralOf(1) == arabicNumeralOf(1)
+        arabicNumeralOf(1) != arabicNumeralOf(2)
     }
 }
